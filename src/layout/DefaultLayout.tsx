@@ -7,7 +7,9 @@ const DefaultLayout: React.FC = (props) => {
       <header className="header">
         <Header />
       </header>
-      <main className="main">{props.children}</main>
+      <main style={{ marginTop: 15 }} className="main">
+        {props.children}
+      </main>
 
       <footer className="footer">
         <Footer />
