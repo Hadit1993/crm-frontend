@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AddTicketForm from "../../components/addTicketForm/AddTicketForm.comp";
 import BreadCrumbComponent from "../../components/breadcrumb/BreadCrumb.comp";
-import { isTextShort } from "../../utils/validation";
+import {
+  isTextShort,
+  validateDetail,
+  validateSubject,
+} from "../../utils/validation";
 import { FormControlElement, FormEventHandler } from "../entry/Entry.page";
 import "./addTicket.style.css";
 
@@ -30,14 +34,18 @@ const AddTicket = () => {
   const onHandleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
 
-    const isSubjectValid = isTextShort(formData.subject);
+    const subjectValidateState = validateSubject(formData.subject);
+    const detailValidateState = validateDetail(formData.detail);
 
     setFormError({
-      ...formError,
-      subject: !isSubjectValid ? "subject is not valid" : "",
+      subject: subjectValidateState.error || "",
+      issueDate:
+        !formData.issueDate || formData.issueDate.length === 0
+          ? "issue found should not ne empty"
+          : "",
+      detail: detailValidateState.error || "",
     });
   };
-  useEffect(() => {}, [formData]);
 
   return (
     <Container>

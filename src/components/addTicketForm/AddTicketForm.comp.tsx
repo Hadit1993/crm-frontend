@@ -26,6 +26,7 @@ function AddTicketForm(props: {
               type="text"
               name="subject"
               placeholder="subject"
+              isInvalid={props.formError.subject.length > 0}
               // required
               value={props.formData.subject}
               onChange={props.handleOnChange}
@@ -43,10 +44,16 @@ function AddTicketForm(props: {
             <Form.Control
               type="date"
               name="issueDate"
-              // required
+              isInvalid={
+                props.formError.issueDate !== undefined &&
+                props.formError.issueDate.length > 0
+              }
               value={props.formData.issueDate}
               onChange={props.handleOnChange}
             />
+            <Form.Text className="text-danger">
+              {props.formError.issueDate}
+            </Form.Text>
           </Col>
         </Form.Group>
 
@@ -56,10 +63,14 @@ function AddTicketForm(props: {
             style={{ minHeight: 150 }}
             as="textarea"
             name="detail"
-            // required
+            isInvalid={props.formError.detail.length > 0}
             value={props.formData.detail}
             onChange={props.handleOnChange}
           />
+
+          <Form.Text className="text-danger">
+            {props.formError.detail}
+          </Form.Text>
         </Form.Group>
 
         <Button
