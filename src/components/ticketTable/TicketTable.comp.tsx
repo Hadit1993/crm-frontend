@@ -1,4 +1,5 @@
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Ticket from "../../models/Ticket";
 
 const TicketTable = (props: { tickets: Ticket[] }) => {
@@ -17,7 +18,16 @@ const TicketTable = (props: { tickets: Ticket[] }) => {
           props.tickets.map((ticket) => (
             <tr key={ticket.id.toString()}>
               <td>{ticket.id}</td>
-              <td>{ticket.subject}</td>
+
+              <td>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`ticket/${ticket.id}`}
+                >
+                  {ticket.subject}
+                </Link>
+              </td>
+
               <td>{ticket.status}</td>
               <td>{ticket.addedAt}</td>
             </tr>

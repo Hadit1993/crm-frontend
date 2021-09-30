@@ -6,11 +6,13 @@ import MessageHistory from "../../components/messageHistory/MessageHistory.comp"
 import UpdateTicket from "../../components/updateTicket/UpdateTicket.comp";
 import { useState } from "react";
 import { FormControlElement, FormEventHandler } from "../entry/Entry.page";
+import { useParams } from "react-router";
 
 const fakeTickets = tickets as Ticket[];
 
 const TicketPage = () => {
-  const sampleTicket = fakeTickets[0];
+  const { tId } = useParams<{ tId?: string }>();
+  const sampleTicket = fakeTickets.find((tick) => tick.id === parseInt(tId!))!;
   const [message, setMessage] = useState("");
 
   const onMessageChange = (event: React.ChangeEvent<FormControlElement>) => {

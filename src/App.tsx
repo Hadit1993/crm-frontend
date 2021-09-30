@@ -1,4 +1,6 @@
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import PrivateRoute from "./components/privateRoute/PrivateRoute.comp";
 import DefaultLayout from "./layout/DefaultLayout";
 import Dashboard from "./pages/dashboard/Dashboard.page";
 import { Entry } from "./pages/entry/Entry.page";
@@ -9,13 +11,28 @@ import TicketList from "./pages/ticketListing/TicketList.page";
 function App() {
   return (
     <div className="App">
-      {/* <Entry /> */}
-      <DefaultLayout>
-        {/* <Dashboard /> */}
-        {/* <AddTicket /> */}
-        {/* <TicketList /> */}
-        <TicketPage />
-      </DefaultLayout>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Entry />
+          </Route>
+          <DefaultLayout>
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path="/add-ticket">
+              <AddTicket />
+            </PrivateRoute>
+            <PrivateRoute path="/tickets">
+              <TicketList />
+            </PrivateRoute>
+
+            <PrivateRoute path="/ticket/:tId">
+              <TicketPage />
+            </PrivateRoute>
+          </DefaultLayout>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

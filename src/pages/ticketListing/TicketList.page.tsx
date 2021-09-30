@@ -6,6 +6,7 @@ import TicketTable from "../../components/ticketTable/TicketTable.comp";
 import { FormControlElement } from "../entry/Entry.page";
 import tickets from "../../assets/data/dummy.ticket.json";
 import Ticket from "../../models/Ticket";
+import { Link } from "react-router-dom";
 
 const TicketList = () => {
   const [query, setQuery] = useState("");
@@ -37,11 +38,13 @@ const TicketList = () => {
       </Row>
       <Row style={{ marginTop: 20 }}>
         <Col>
-          <Button style={{ color: "white" }} variant="info">
-            Add New Ticket
-          </Button>
+          <Link to="add-ticket">
+            <Button style={{ color: "white" }} variant="info">
+              Add New Ticket
+            </Button>
+          </Link>
         </Col>
-        <Col style={{ textAlign: "right" }} className="text-right">
+        <Col style={{}} className="text-right">
           <SearchForm handleOnChange={handleSearchOnChange} query={query} />
         </Col>
       </Row>
